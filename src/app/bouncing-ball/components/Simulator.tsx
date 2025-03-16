@@ -5,7 +5,7 @@ import {useEffect, useRef, useState} from "react";
 import {BALL_SIZE, BALL_WEIGHTS, FALL_HEIGHTS, MULTIPLE_INPUT_THRESHOLD_MS} from "@/consts/bouncing-ball.const";
 import styles from './Simulator.module.scss';
 
-function Simulator() {
+export default function Simulator() {
     const [drop, setDrop] = useState(false)
     const lastInputTime = useRef<number>(0);
     const inputCount = useRef<number>(0);
@@ -71,6 +71,3 @@ function Simulator() {
         <div className={styles.ground}></div>
     </div>
 }
-
-export default Simulator;
-

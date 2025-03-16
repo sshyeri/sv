@@ -15,9 +15,9 @@ export type Direction = 1 | -1;
  * x: x-axis coordinate
  * y: y-axis coordinate
  */
-export type Coordinate ={
-  x: number;
-  y: number;
+export type Coordinate = {
+    x: number;
+    y: number;
 };
 
 /**
@@ -30,11 +30,11 @@ export type Coordinate ={
  * direction: 1 for going down, -1 for going up the road (y-axis)
  */
 export type Vehicle = {
-  width: number;
-  length: number;
-  position: Coordinate;
-  speed: number;
-  direction: Direction;
+    width: number;
+    length: number;
+    position: Coordinate;
+    speed: number;
+    direction: Direction;
 };
 
 /**
@@ -44,7 +44,7 @@ export type Vehicle = {
  * direction: 1 for going down, -1 for going up the road (y-axis)
  */
 export type Observer = Vehicle & {
-  fov: 178;
+    fov: 178;
 };
 
 /**
@@ -56,8 +56,21 @@ export type Observer = Vehicle & {
  * length: Road length in pixels
  */
 export type Road = {
-  vehicles: Vehicle[];
-  observer: Observer;
-  width: number;
-  length: number;
+    vehicles: Vehicle[];
+    observer: Observer;
+    width: number;
+    length: number;
 };
+
+/**
+ * Check if the vehicle is an observer
+ * @param target Vehicle or Observer object
+ */
+export function isObserver(target: Vehicle | Observer): target is Observer {
+    return (target as Observer).fov !== undefined;
+}
+
+export type SelectedVehicleData = {
+    position: Coordinate;
+    fovCoverageRatio: number;
+}

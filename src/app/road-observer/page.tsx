@@ -1,9 +1,13 @@
-const RoadObserverPage = async () => {
-  /**
-   * You can use "useRoadStream" hook or modify it as needed to implement this page.
-   * const { road } = useRoadStream(isPaused);
-   */
-  return <div />
+import RoadObserver from "@/app/road-observer/components/RoadObserver";
+
+
+const RoadObserverPage = () => {
+
+  return <div>
+    <h3>Road Observer</h3>
+    <RoadObserver/>
+  </div>
+
 };
 
 export default RoadObserverPage;

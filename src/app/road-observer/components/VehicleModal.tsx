@@ -1,28 +1,30 @@
 'use client';
 
-import {useEffect} from "react";
-import {Coordinate} from "@/types/road-observer.type";
+import {useCallback, useEffect} from "react";
+import {SelectedVehicleData} from "@/types/road-observer.type";
 
 type VehicleModalProps = {
-    position: Coordinate;
-    fovCoverageRatio: number;
+    data: SelectedVehicleData;
     onClose: () => void;
 }
 
-export default function VehicleModal({position, fovCoverageRatio, onClose}: VehicleModalProps) {
+export default function VehicleModal({data: {position, fovCoverageRatio}, onClose}: VehicleModalProps) {
+
+    const handleKeyDown = useCallback((event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+            onClose();
+        }
+    }, [onClose]);
+
     useEffect(() => {
         document.body.style.overflow = 'hidden';
 
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                onClose();
-            }
-        });
+        window.addEventListener('keydown', handleKeyDown);
         return () => {
             document.body.style.overflow = 'auto';
-            window.removeEventListener('keydown', () => {});
+            window.removeEventListener('keydown', handleKeyDown);
         }
-    }, []);
+    }, [handleKeyDown]);
 
     return (
         <div style={{
@@ -37,13 +39,12 @@ export default function VehicleModal({position, fovCoverageRatio, onClose}: Vehi
             <div style={{
                 position: 'absolute',
                 backgroundColor: 'white',
-                borderRadius: '5px',
+                borderRadius: 5,
                 top: position.y,
                 left: position.x,
                 padding: 15
-
             }} onClick={(e) => e.stopPropagation()}>
-                <h4>FOV Coverage Ratio: {fovCoverageRatio}%</h4>
+                <h4>FOV Coverage Ratio: {Math.round(fovCoverageRatio * 100)}%</h4>
                 <button onClick={onClose}>close</button>
             </div>
 
