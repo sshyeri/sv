@@ -10,6 +10,17 @@
 export type Direction = 1 | -1;
 
 /**
+ * Coordinate type
+ *
+ * x: x-axis coordinate
+ * y: y-axis coordinate
+ */
+export type Coordinate ={
+  x: number;
+  y: number;
+};
+
+/**
  * Vehicle type
  *
  * position: Image coordinates (x, y) for the vehicle
@@ -21,10 +32,7 @@ export type Direction = 1 | -1;
 export type Vehicle = {
   width: number;
   length: number;
-  position: {
-    x: number;
-    y: number;
-  };
+  position: Coordinate;
   speed: number;
   direction: Direction;
 };
